@@ -52,3 +52,8 @@ SELECT * FROM Student_Info;
 ALTER TABLE Student_Info
 ADD MARK INT;
 SELECT * FROM Student_Info;
+
+//For Creating backup of the table or specific data
+USE interview1;
+CREATE TABLE Student AS SELECT * FROM Student_Info;
+SELECT * FROM Student;
