@@ -1,0 +1,54 @@
+//For creating database
+CREATE DATABASE Interview1;
+
+//For using a Created database
+USE Interview1;
+
+//For creating a Table
+CREATE TABLE Komal(FName varchar(20), Lname varchar(20), Age INT, Mobile_Number varchar(20), Education varchar(20) );
+
+//For Inserting Values in the table
+INSERT INTO Komal VALUES("Komal", "Dumbare", 23, "2413675634", "Graduation-BE");
+
+//For showing the data from the table
+SELECT * FROM Komal;
+
+//Inserting the more values at a time
+INSERT INTO Komal VALUES("Kunal","Dumbare",21,"9876543219","Third Year-BE"),
+("Tanmay","Dumbare",17,"6789043421","12th-class"),
+("Shreya","Gaykar",16,"8901234567","11th-class"),
+("Shreyas","Gaykar",15,"5678913456","9th");
+
+//Again displaying the inserted values
+SELECT * FROM Komal;
+
+//It disable the safe mode of the mySQL connector so that we can delete the specific record or data or database or table
+SET SQL_SAFE_UPDATES = 0;
+
+// Query to delete a specific record 
+DELETE FROM Komal WHERE Fname = "Shreyas";
+
+// Query to rollback the deleted Specific record or data
+START TRANSACTION;
+DELETE FROM Komal WHERE Fname ="Shreyas";
+ROLLBACK;
+
+// Again displaying the all data 
+SELECT * FROM Komal;
+
+// It showing the all databases
+SHOW databases;
+
+//This Query alter the name of the table
+ALTER TABLE Komal RENAME TO Student_Info;
+SELECT * FROM Student_Info;
+
+//This query alter the name of the specific column
+ALTER TABLE Student_Info
+RENAME COLUMN Mobile_Number TO Mobile;
+SELECT * FROM Student_Info;
+
+// This query is used to add more column in the table
+ALTER TABLE Student_Info
+ADD MARK INT;
+SELECT * FROM Student_Info;
