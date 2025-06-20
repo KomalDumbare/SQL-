@@ -1,0 +1,44 @@
+USE interview1;
+// Creating table 
+CREATE TABLE Stud(Name varchar(20), Age INT, Marks INT, Mobile varchar(20), Percentage INT);
+
+//showing the table
+SELECT * FROM Stud;
+
+//Inserting a values in the table
+INSERT INTO Stud VALUES("Komal",22,85,"546789012",80),
+ ("Kunal",20,90,"9867896789",85), 
+ ("Tanmay",17,80,"7478909012",85), 
+ ("Shreya",16,84,"846889811",75),
+ ("Shreyas",14,95,"946789012",90);
+ 
+//Showing the values
+ SELECT * FROM Stud;
+ 
+//It shows the all DISTICT values from the table
+ SELECT DISTINCT (Marks) FROM Stud;
+ 
+ //It shows the all DISTINCT values from the table in ascending order
+SELECT DISTINCT (Marks) FROM Stud ORDER BY Marks;
+
+//It counts the number of rows or data store in the table
+SELECT COUNT(Name) FROM Stud; 
+
+// It gives the all null or non null values as its count
+SELECT COUNT(*) FROM Stud;
+
+// It give the values as a output based on the condition
+SELECT COUNT(Marks) FROM Stud WHERE Marks > 85;
+
+//The TOP command is not supporting to the mysql server so the new command to shows the data at specific limit
+SELECT Marks FROM Stud WHERE Marks > 85 LIMIT 2;
+
+//It arrange the data descending order and shows the first value
+SELECT Name FROM Stud ORDER BY Name DESC LIMIT 1;
+
+//The random function that give any random value from the database. It is used in the examination to shuffle the quetions.
+SELECT Name FROM Stud ORDER BY RAND() LIMIT 2;
+
+//IN operator is used insted of OR operator it gives all mention names as output
+SELECT * FROM Stud WHERE Name IN('Komal','kunal','shreyas'); 
+ 
