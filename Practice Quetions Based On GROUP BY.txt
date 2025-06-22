@@ -1,0 +1,95 @@
+//Prctice queries Based on Group BY Clause
+1. Count of Employees in Each Department
+
+sql
+SELECT DeptNo, COUNT(*) AS EmployeeCount
+FROM Employee
+GROUP BY DeptNo;
+2. Average Salary by Department
+
+sql
+SELECT DeptNo, AVG(Salary) AS AvgSalary
+FROM Employee
+GROUP BY DeptNo;
+3. Maximum Salary by Manager
+
+sql
+SELECT ManagerNo, MAX(Salary) AS MaxSalary
+FROM Employee
+GROUP BY ManagerNo;
+4. Minimum Age by Department
+
+sql
+SELECT DeptNo, MIN(Age) AS Youngest
+FROM Employee
+GROUP BY DeptNo;
+5. Total Salary Paid by Each Manager
+
+sql
+SELECT ManagerNo, SUM(Salary) AS TotalSalary
+FROM Employee
+GROUP BY ManagerNo;
+6. Number of Employees Joined Each Year
+
+sql
+SELECT YEAR(JoinDate) AS JoinYear, COUNT(*) AS NumEmployees
+FROM Employee
+GROUP BY YEAR(JoinDate);
+7. Count of Employees for Each Unique Salary
+
+sql
+SELECT Salary, COUNT(*) AS NumEmployees
+FROM Employee
+GROUP BY Salary;
+8. Average Age by Department and Manager
+
+sql
+SELECT DeptNo, ManagerNo, AVG(Age) AS AvgAge
+FROM Employee
+GROUP BY DeptNo, ManagerNo;
+9. List Departments with More Than One Employee (using HAVING)
+
+sql
+SELECT DeptNo, COUNT(*) AS EmployeeCount
+FROM Employee
+GROUP BY DeptNo
+HAVING COUNT(*) > 1;
+10. Department with the Highest Total Salary
+
+sql
+SELECT DeptNo, SUM(Salary) AS TotalSalary
+FROM Employee
+GROUP BY DeptNo
+ORDER BY TotalSalary DESC
+LIMIT 1;
+11. Number of Employees with Each Mobile Number Prefix
+
+sql
+SELECT LEFT(MobileNo, 2) AS Prefix, COUNT(*) AS Count
+FROM Employee
+GROUP BY LEFT(MobileNo, 2);
+12. Count of Employees by Age
+
+sql
+SELECT Age, COUNT(*) AS NumEmployees
+FROM Employee
+GROUP BY Age;
+13. Total Salary by Department for Employees Older Than 18
+
+sql
+SELECT DeptNo, SUM(Salary) AS TotalSalary
+FROM Employee
+WHERE Age > 18
+GROUP BY DeptNo;
+14. Number of Employees by Department and Year Joined
+
+sql
+SELECT DeptNo, YEAR(JoinDate) AS JoinYear, COUNT(*) AS EmployeeCount
+FROM Employee
+GROUP BY DeptNo, YEAR(JoinDate);
+15. Maximum Salary by Department and Manager
+
+sql
+SELECT DeptNo, ManagerNo, MAX(Salary) AS MaxSalary
+FROM Employee
+GROUP BY DeptNo, ManagerNo;

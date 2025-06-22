@@ -1,0 +1,66 @@
+// On WHERE Clause
+USE interview1;
+CREATE TABLE Employee(Name TEXT, Age INT, Mobile VARCHAR(20), Joining_Date DATE, Salary INT, Department_Id INT, Emp_Id INT);
+SELECT * FROM Employee;
+INSERT INTO Employee VALUES('Raman',23,'7890123445','2025-10-1',25000,01,11),
+('Komal', 22,'890123456','2025-7-31',60000,01,12),
+('Kunal',21,'7812345678','2026-12-30',55000,02,13),
+('Shreya',16,'9821345671','2030-11-1',50000,03,14),
+('Tanmay',17,'8790125467','2028-10-12',65000,03,15),
+('Shreyas',14,'8765432190','2032-6-12',60000,04,16);
+SELECT * FROM Employee;
+SELECT Age FROM Employee WHERE Age > 20;
+SELECT Salary FROM Employee WHERE Salary > 50000;
+SELECT Joining_Date FROM Employee WHERE Joining_Date > '2028-10-12';
+SELECT * FROM Employee WHERE Name = 'Komal';
+SELECT * FROM Employee WHERE Department_Id = 3;
+SELECT * FROM Employee WHERE Age BETWEEN 15 AND 22;
+SELECT Name FROM Employee WHERE Name LIKE 'S%';
+SELECT Mobile FROM Employee WHERE Mobile LIKE '%90';
+SELECT * FROM Employee WHERE Department_Id NOT IN (1); 
+SELECT * FROM Employee WHERE Salary BETWEEN 50000 AND 60000;
+SELECT * FROM Employee WHERE YEAR(Joining_Date) = 2025;
+SELECT * FROM Employee WHERE NAME != 'Tanmay';
+SELECT * FROM Employee WHERE Age <= 18;
+SELECT * FROM Employee WHERE Department_Id = 1 OR Department_Id = 3;
+SELECT * FROM Employee WHERE Department_Id IN(1,3);
+SELECT * FROM Employee WHERE Name NOT LIKE 'S%';
+SELECT * FROM Employee WHERE Mobile NOT LIKE '78%';
+SELECT * FROM EmplOyee WHERE YEAR(Joining_Date) < 2030 AND Salary > 50000;  
+SELECT * FROM Employee WHERE Name LIKE '%a%';
+SELECT * FROM Employee WHERE MONTH(Joining_Date) = 10;
+SELECT * FROM Employee WHERE Department_Id = 3 AND Salary < 60000;
+
+//On GROUP BY Clause
+USE interview1;
+CREATE TABLE Employee(Name TEXT, Age INT, Mobile VARCHAR(20), Joining_Date DATE, Salary INT, Department_Id INT, Emp_Id INT);
+SELECT * FROM Employee;
+INSERT INTO Employee VALUES('Raman',23,'7890123445','2025-10-1',25000,01,11),
+('Komal', 22,'890123456','2025-7-31',60000,01,12),
+('Kunal',21,'7812345678','2026-12-30',55000,02,13),
+('Shreya',16,'9821345671','2030-11-1',50000,03,14),
+('Tanmay',17,'8790125467','2028-10-12',65000,03,15),
+('Shreyas',14,'8765432190','2032-6-12',60000,04,16);
+SELECT Department_Id, COUNT(*) AS Total_Count FROM Employee GROUP BY Department_Id; 
+SELECT Department_Id , AVG(Salary) AS Avg_Salary FROM Employee GROUP BY Department_Id;  
+
+SELECT Department_Id, MIN(Age) AS Minimum_Age FROM Employee GROUP BY Department_Id;
+SELECT Department_Id, SUM(Salary) AS Total_Salary FROM Employee GROUP BY Department_Id;
+SELECT Department_Id, COUNT(Emp_Id) AS Each_Year_Count FROM Employee GROUP BY Department_Id;
+SELECT YEAR(Joining_Date) AS JoinYear, COUNT(*) AS total_Count
+FROM Employee
+GROUP BY YEAR(Joining_Date);
+SELECT Salary, COUNT(*) AS Count_Each_Salary FROM Employee GROUP BY Salary;
+SELECT Department_Id, AVG(Age) AS AVG_AGE FROM Employee GROUP BY Department_Id;
+SELECT Department_Id, COUNT(*) AS Department FROM Employee GROUP BY Department_Id HAVING COUNT(*) > 1;
+SELECT Department_Id, SUM(Salary) AS Total_Salary FROM Employee GROUP BY Department_Id ORDER BY Total_Salary DESC LIMIT 1;
+SELECT LEFT(Mobile,2) AS Prefix , COUNT(*) AS COUNT FROM Employee GROUP BY LEFT(Mobile,2);
+SELECT RIGHT(Mobile,2) AS Prefix , COUNT(*) AS COUNT FROM Employee GROUP BY RIGHT(Mobile,2);
+SELECT Department_Id, COUNT(Age) AS Age_COUNT FROM Employee GROUP BY Department_Id;
+SELECT Age, COUNT(*) AS NumEmployees
+FROM Employee
+GROUP BY Age;
+SELECT Department_Id, SUM(Salary) AS Older_than_18 FROM Employee WHERE Age > 18 GROUP BY Department_Id;
+SELECT Department_Id, YEAR(Joining_Date) AS JoinDate, COUNT(*) AS Total_Employee FROM Employee GROUP BY Department_Id, YEAR(Joining_Date);
+
+
