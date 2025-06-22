@@ -1,0 +1,91 @@
+// Real time interview Quetions Based on SQL WHERE Clause 
+1. Find employees who joined before 2027 and have a salary less than 60,000.
+
+sql
+SELECT Name, JoinDate, Salary
+FROM Employee
+WHERE JoinDate < '2027-01-01' AND Salary < 60000;
+2. List all employees whose mobile number starts with '78' or '98'.
+
+sql
+SELECT Name, MobileNo
+FROM Employee
+WHERE MobileNo LIKE '78%' OR MobileNo LIKE '98%';
+3. Retrieve employees who are not in department 1.
+
+sql
+SELECT Name, DeptNo
+FROM Employee
+WHERE DeptNo <> 1;
+4. Get names of employees who joined in or after 2028 and have age less than 18.
+
+sql
+SELECT Name, Age, JoinDate
+FROM Employee
+WHERE JoinDate >= '2028-01-01' AND Age < 18;
+5. Find all employees whose salary is between 50,000 and 65,000 (inclusive).
+
+sql
+SELECT Name, Salary
+FROM Employee
+WHERE Salary BETWEEN 50000 AND 65000;
+6. Show employees whose names end with 'a'.
+
+sql
+SELECT Name
+FROM Employee
+WHERE Name LIKE '%a';
+7. List employees who joined in the year 2030 or later and have a salary not equal to 60,000.
+
+sql
+SELECT Name, JoinDate, Salary
+FROM Employee
+WHERE JoinDate >= '2030-01-01' AND Salary <> 60000;
+8. Display employees in department 3 or 4 who are younger than 18.
+
+sql
+SELECT Name, DeptNo, Age
+FROM Employee
+WHERE DeptNo IN (3, 4) AND Age < 18;
+9. Find employees whose name contains the letter 'y' (case-insensitive).
+
+sql
+SELECT Name
+FROM Employee
+WHERE LOWER(Name) LIKE '%y%';
+10. Retrieve all employees who joined after 2025 and have a mobile number of exactly 10 digits.
+
+sql
+SELECT Name, MobileNo, JoinDate
+FROM Employee
+WHERE JoinDate > '2025-12-31' AND LENGTH(MobileNo) = 10;
+11. List employees whose salary is not between 25,000 and 60,000.
+
+sql
+SELECT Name, Salary
+FROM Employee
+WHERE Salary NOT BETWEEN 25000 AND 60000;
+12. Get all employees who joined on the first day of any month.
+
+sql
+SELECT Name, JoinDate
+FROM Employee
+WHERE DAY(JoinDate) = 1;
+13. Show employees who have the same department number as their manager number.
+
+sql
+SELECT Name, DeptNo, ManagerNo
+FROM Employee
+WHERE DeptNo = ManagerNo;
+14. Find employees whose age is an even number.
+
+sql
+SELECT Name, Age
+FROM Employee
+WHERE MOD(Age, 2) = 0;
+15. List employees who do not have 'a' in their name.
+
+sql
+SELECT Name
+FROM Employee
+WHERE Name NOT LIKE '%a%';
