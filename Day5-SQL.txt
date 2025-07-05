@@ -1,0 +1,57 @@
+USE interview1;
+CREATE TABLE Aggregation(Name TEXT, Age INT, Salary INT,Department INT,Employee_Id INT);
+SELECT * FROM Aggregation;
+INSERT INTO Aggregation VALUES('Radha',22,25000,1,1),
+('Kunal',21,35000,2,2),
+('Tanmay',25,40000,3,3),
+('Komal',27,60000,4,4),
+('Shreya',20,56000,5,5),
+('Raja',23,55000,6,6),
+('Shreyash',25,50000,7,7),
+('Shiv',26,40000,8,8);
+SELECT * FROM Aggregation;
+SELECT COUNT(*) FROM Aggregation;
+SELECT COUNT(Name) FROM Aggregation;
+SELECT COUNT(Name) FROM Aggregation WHERE Name LIKE '%al';
+//SQL Aggregation Functions
+SELECT COUNT(DISTINCT Age) FROM Aggregation;
+SELECT COUNT(*) AS Number_of_Records FROM Aggregation;
+SELECT COUNT(*) AS Group_By_Id From Aggregation GROUP BY Age;
+
+SELECT AVG(Age) FROM Aggregation;
+SELECT AVG(Salary) FROM Aggregation where Employee_Id = 1;
+SELECT AVG(Salary) AS Avg_Salary FROM Aggregation;
+SELECT Salary FROM Aggregation  WHERE Salary > (SELECT AVG(Salary) AS Avg_Salary FROM Aggregation) LIMIT 1 OFFSET 0;
+
+SELECT MIN(Salary) AS Min_Salary FROM Aggregation;
+SELECT MAX(Salary) FROM Aggregation;
+
+SELECT Name,Salary AS Max_Salary FROM Aggregation WHERE Salary = (SELECT MAX(Salary) FROM Aggregation);
+SELECT Name, Age AS Lowest_Age FROM Aggregation WHERE Age = (SELECT MIN(Age) FROM Aggregation);
+SELECT COUNT(Department) AS Number_of_Employee FROM Aggregation WHERE Department = 4; 
+SELECT Department, COUNT(*) AS EACH_Department FROM Aggregation GROUP BY Department;
+SELECT Department, AVG(Salary) AS Avg_Salary FROM Aggregation GROUP BY Department;
+SELECT Department FROM Aggregation WHERE Age > (SELECT AVG(Age) FROM Aggregation) GROUP BY Department;
+SELECT Department, COUNT(*) FROM Aggregation GROUP BY Department HAVING COUNT(*) > 1;
+
+SELECT Department, SUM(Salary) AS Exceed_Limit FROM Aggregation GROUP BY Department HAVING Exceed_LIMIT > 90000;
+SELECT Department, MAX(Age) AS Highest_Age FROM Aggregation GROUP BY Department HAVING Highest_Age < 25; 
+SELECT Department, AVG(Salary) AS Avg_Salary FROM Aggregation GROUP BY Department HAVING Avg_Salary BETWEEN 40000 AND 50000;
+SELECT Department, COUNT(*) AS Total_Employee FROM Aggregation GROUP BY Department HAVING Department = Total_Employee;
+
+SELECT Department, AVG(Age),Max(Age),Min(Age) FROM Aggregation GROUP BY Department;
+SELECT Salary AS Highest_Salary FROM Aggregation WHERE Salary > (SELECT AVG(Salary) FROM Aggregation); 
+SELECT Name,Salary AS Higher_Than_3 FROM Aggregation WHERE Salary > (SELECT MAX(Salary) FROM Aggregation WHERE Department = 3);
+ 
+
+
+
+
+
+
+
+
+
+
+
+ 
