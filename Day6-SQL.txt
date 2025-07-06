@@ -1,0 +1,69 @@
+//SQL CONSTRAINT
+USE interview1;
+CREATE TABLE SQL_Keys(Name TEXT NOT NULL,
+Date DATE NOT NULL,
+Mobile VARCHAR(20),
+Adhar_No VARCHAR(20),
+Marks INT,
+CONSTRAINT pk_constraint_name PRIMARY KEY (Mobile, Adhar_No,Marks));
+INSERT INTO SQL_Keys VALUES('Ram', '2025-4-6', '9876543210','123456789012',90),
+('Shyam','2025-12-24','7890123456','234567890123',95),
+('Radha','2025-06-30','8890776621','4567890123456',88),
+('Rani','2025-07-12','7790342156','678901234567',77),
+('Shiv','2025-10-9','8901234545','890123456789',98),
+('Shyama','2025-10-10','7890235665','987654345678',87);	
+SELECT * FROM SQL_Keys;
+SELECT Name, Marks AS Only_Name_Marks From SQL_Keys;
+SELECT * FROM SQL_Keys WHERE Marks > 85;
+SELECT * FROM SQL_Keys WHERE Name LIKE 'S%';
+SELECT * FROM SQL_Keys WHERE Marks BETWEEN 80 AND 90;
+SELECT * FROM SQL_Keys WHERE Name LIKE '%a'; 
+SELECT * FROM SQL_Keys WHERE DATE > '2025-07-01';
+SELECT Name, LEFT(Mobile,2) FROM SQL_Keys WHERE LEFT(Mobile,2) = '78';
+SELECT Name,Marks FROM SQL_Keys WHERE Marks <> 90;
+SELECT NAME FROM SQL_Keys ORDER BY Name;
+SELECT NAME, length(Name) FROM SQL_Keys WHERE length(Name) > 4; 
+SELECT * FROM SQL_Keys ORDER BY Marks DESC;
+SELECT Date,Marks FROM SQL_Keys ORDER BY DATE AND MARKS ASC; 
+SELECT COUNT(*) FROM SQL_Keys;
+SELECT AVG(Marks) AS Avg_Marks FROM SQL_Keys;
+SELECT MAX(Marks) AS Highest_Marks FROM SQL_Keys;
+SELECT MIN(Marks) AS Minimum_Marks From SQL_Keys;
+SELECT SUM(Marks) AS Total FROM SQL_Keys;
+SELECT COUNT(*),Marks AS Same_Marks FROM SQL_Keys GROUP BY Marks;
+SELECT SUBSTR(Name,1,1), COUNT(*) AS Total_Count FROM SQL_Keys GROUP BY SUBSTR(Name,1,1);
+SELECT Name,length(Name) AS Total_Length,Mobile, Length(Mobile) AS Total_No_Length FROM SQL_Keys;
+SELECT Name, UCASE(Name) AS Upper_Case FROM SQL_Keys;
+SELECT NAME, LCASE(Name) AS Lower_Case FROM SQL_Keys;
+SELECT Name, reverse(Name) AS REVERSE_Name FROM SQL_Keys;
+SELECT Name, LEFT(Name, 2) AS First_TWO_Char FROM SQL_Keys;
+SELECT DATE, month(Date) AS Month_Of_Year FROM SQL_Keys;
+SELECT DATE, YEAR(DATE) AS Year_Of_Series FROM SQL_Keys GROUP BY DATE;
+SELECT DATE, DAY(DATE) AS Day_of_Month FROM SQL_Keys;
+SELECT DATE, MONTH(DATE) AS Month_Of_Year FROM SQL_Keys WHERE MONTH(DATE) = '10';
+SELECT Name, DATE_FORMAT(Date, '%M') AS Month_Name FROM SQL_Keys;
+SET SQL_SAFE_UPDATES = 0; 
+UPDATE SQL_Keys SET Marks = Marks + 5 WHERE Marks < 90;
+UPDATE SQL_Keys SET Name = 'Shyam lal' WHERE Name = 'Shyam';
+SELECT * FROM SQL_Keys;
+UPDATE SQL_Keys SET DATE = '2025-01-01' WHERE Name = 'Rani';
+SELECT * FROM SQL_Keys;
+DELETE FROM SQL_Keys WHERE Marks < 80;
+SELECT * FROM SQL_Keys;
+DELETE FROM SQL_Keys WHERE Name = 'Rani';
+SELECT * FROM SQL_Keys;
+SELECT Name,
+Marks, 
+CASE
+	WHEN Marks >= 90 THEN 'A'
+	WHEN Marks BETWEEN 80 AND 89 THEN 'B'
+	WHEN Marks < 80 THEN 'C'
+ELSE 'Fail'
+END AS Pass
+From SQL_Keys; 
+SELECT DISTINCT Name,Marks From SQL_Keys;
+SELECT Name AS Name_Of_Student, Marks AS Score FROM SQL_Keys;
+SELECT Marks From SQL_Keys WHERE Marks > (SELECT AVG(Marks) FROM SQL_Keys);
+SELECT Marks FROM SQL_Keys WHERE Marks = (SELECT MAX(Marks) FROM SQL_Keys);
+SELECT Marks FROM SQL_Keys LIMIT 3;
+ 
