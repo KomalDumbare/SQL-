@@ -1,0 +1,27 @@
+//Primary key and Foreign Key creation
+USE interview1;
+CREATE TABLE Faculty(Name TEXT, Age INT, Joining_Date DATE, Salary INT, Mobile VARCHAR(20),Subject_Handle VARCHAR(20), Attendance INT);
+INSERT INTO Faculty VALUES('Raman',31,'2023-05-11',40000,'9801234567','Maths',22),
+('Sagar',35,'2021-06-12',50000,'7890123456','BI', 21),
+('Aradhana',35,'2021-06-12',45000,'8245678901','PPL',25),
+('Shivaji',40,'2025-02-01',55000,'7890126543','NLP',23),
+('Sharad',41,'2023-07-13',45000,'9801453210','IoT',22),
+('Deepali',46,'2019-08-19',55000,'9670234156','SE',26),
+('Santosh',42,'2020-07-14','50000','7888345678','CS',25),
+('Laximikant',46,'2019-08-23',60000,'8990992312','DBMS',29),
+('Poonam',35,'2024-10-09',40000,'8888901234','Blockchain',26);
+SELECT * FROM Faculty;
+ALTER TABLE Faculty ADD constraint pk_constraint_name PRIMARY KEY (MOBILE,SUBJECT_HANDLE);
+SELECT * FROM Faculty;
+CREATE TABLE Faculty_Attendance(Mobile VARCHAR(20),Subject_Handle VARCHAR(20),Student_Present INT, constraint fk_constraint_name FOREIGN KEY (Mobile,Subject_Handle) REFERENCES Faculty(Mobile,Subject_Handle));
+INSERT INTO Faculty_Attendance VALUES('9801234567','Maths',45),
+('7890123456','BI',50),
+('8245678901','PPL',49),
+('7890126543','NLP',44),
+('9801453210','IoT',45),
+('9670234156','SE',60),
+('7888345678','CS',55),
+('8990992312','DBMS',45),
+('8888901234','Blockchain',61);
+SELECT * FROM Faculty;
+SELECT * FROM Faculty_Attendance;
