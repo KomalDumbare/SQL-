@@ -1,0 +1,66 @@
+USE interview1;
+CREATE TABLE Faculty(Name TEXT, Age INT, Joining_Date DATE, Salary INT, Mobile VARCHAR(20),Subject_Handle VARCHAR(20), Attendance INT);
+INSERT INTO Faculty VALUES('Raman',31,'2023-05-11',40000,'9801234567','Maths',22),
+('Sagar',35,'2021-06-12',50000,'7890123456','BI', 21),
+('Aradhana',35,'2021-06-12',45000,'8245678901','PPL',25),
+('Shivaji',40,'2025-02-01',55000,'7890126543','NLP',23),
+('Sharad',41,'2023-07-13',45000,'9801453210','IoT',22),
+('Deepali',46,'2019-08-19',55000,'9670234156','SE',26),
+('Santosh',42,'2020-07-14','50000','7888345678','CS',25),
+('Laximikant',46,'2019-08-23',60000,'8990992312','DBMS',29),
+('Poonam',35,'2024-10-09',40000,'8888901234','Blockchain',26);
+-- Primary Key generation 
+SELECT * FROM Faculty;
+ALTER TABLE Faculty ADD constraint pk_constraint_name PRIMARY KEY (MOBILE,SUBJECT_HANDLE);
+SELECT * FROM Faculty;
+--Foreign key generation
+CREATE TABLE Faculty_Attendance(Mobile VARCHAR(20),Subject_Handle VARCHAR(20),Student_Present INT, constraint fk_constraint_name FOREIGN KEY (Mobile,Subject_Handle) REFERENCES Faculty(Mobile,Subject_Handle));
+INSERT INTO Faculty_Attendance VALUES('9801234567','Maths',45),
+('7890123456','BI',50),
+('8245678901','PPL',49),
+('7890126543','NLP',44),
+('9801453210','IoT',45),
+('9670234156','SE',60),
+('7888345678','CS',55),
+('8990992312','DBMS',45),
+('8888901234','Blockchain',61);
+SELECT * FROM Faculty;
+SELECT * FROM Faculty_Attendance;
+SELECT Name,Subject_Handle, Salary From Faculty;
+SELECT * FROM Faculty WHERE Age > 40;
+SELECT Name, Joining_Date FROM Faculty WHERE Joining_Date < '2022-01-01';
+SELECT Name,Salary FROM Faculty WHERE Salary BETWEEN 40000 AND 50000;
+SELECT Name,Salary FROM Faculty ORDER BY Salary DESC LIMIT 3;
+SELECT  COUNT(*) AS Teaching_Count FROM Faculty WHERE Subject_Handle = 'DBMS';
+SELECT AVG(Salary) AS Overall_AVG From Faculty;
+SELECT Subject_Handle, Student_Present FROM Faculty_Attendance ORDER BY Student_Present;
+SELECT Subject_Handle, Student_Present FROM Faculty_Attendance WHERE Student_Present > 50;
+SELECT AVG(Student_Present) AS AVG_Student_Prsent FROM Faculty_Attendance;
+USE interview1;
+SHOW Tables;
+SELECT * FROM Faculty;
+SELECT * FROM Faculty_Attendance;
+-- Left Outer Join
+SELECT F.Name, F.Joining_Date, F.Mobile,F.Subject_Handle, FA.Student_Present FROM Faculty F 
+LEFT OUTER JOIN Faculty_Attendance FA on F.Subject_Handle = FA.Subject_Handle; 
+-- Right Outer Join
+SELECT F.Name,F.Subject_Handle,FA.Mobile, FA.Student_Present FROM Faculty F RIGHT OUTER JOIN Faculty_Attendance FA ON F.Subject_Handle = FA.Subject_Handle;
+-- Full Outer Join
+SELECT F.Name, F.Joining_Date, F.Mobile,F.Subject_Handle, FA.Student_Present FROM Faculty F 
+LEFT OUTER JOIN Faculty_Attendance FA on F.Subject_Handle = FA.Subject_Handle 
+UNION
+SELECT F.Name, F.Joining_Date, F.Mobile,F.Subject_Handle, FA.Student_Present FROM Faculty F 
+LEFT OUTER JOIN Faculty_Attendance FA on F.Subject_Handle = FA.Subject_Handle ;
+-- Various queries on both join
+SELECT F.Name,FA.Student_Present FROM Faculty F LEFT OUTER JOIN Faculty_Attendance FA ON F.Subject_Handle = FA.Subject_Handle;
+SELECT F.Name,F.Mobile, FA.Student_Present FROM Faculty F LEFT OUTER JOIN Faculty_Attendance FA ON F.Mobile = FA.Mobile WHERE Student_Present = NULL; 
+SELECT F.Name, COUNT(FA.Student_Present) AS Total_Attendance FROM Faculty F LEFT OUTER JOIN Faculty_Attendance FA ON F.Mobile = FA.Mobile GROUP BY Name;
+SELECT F.Name, FA.Student_Present FROM Faculty F RIGHT OUTER JOIN Faculty_Attendance FA ON F.Mobile = FA.Mobile;
+SELECT  F.Name,
+        F.Subject_Handle,
+        FA.Student_Present
+FROM    Faculty AS F
+INNER JOIN Faculty_Attendance AS FA    -- inner join for exact matches
+       ON F.Mobile = FA.Mobile
+      AND F.Subject_Handle = FA.Subject_Handle
+WHERE   FA.Student_Present > 50;
