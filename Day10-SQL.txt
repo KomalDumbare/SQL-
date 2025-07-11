@@ -1,0 +1,59 @@
+USE interview1;
+SELECT * FROM date_Info;
+SELECT * FROM EMP;
+-- SQL Date Function
+-- 1) SELECT THE CURRENT DATE AND TIME IN THE FROMAT "YYYY-MM-DD HH:MM:SS"
+SELECT NOW();
+
+-- 2) SELECT THE CURRENT DATE WITHOUT SELECTING THE TIME
+SELECT curdate();
+
+-- 3) SELECT THE CURRENT TIME WITHOUT SELECTING THE DATE 
+SELECT CURTIME();
+
+-- 4) SELECTING THE DATE FROM THE GIVEN DATABASE/TABLE 
+SELECT Name, DATE(Joining_Date) AS Join_ From Emp;
+
+-- 5) EXTRACT THE SPECIFIC VALUE FROM THE DATE LIKE DAY,MONTH,YEAR, TIME ,SECONDS 
+SELECT Name,EXTRACT(DAY FROM Joining_Date) AS Join_ FROM Emp;
+SELECT Name,EXTRACT(MONTH FROM Joining_Date) AS Join_ FROM Emp;
+SELECT Name,EXTRACT(YEAR FROM Joining_Date) AS Join_ FROM Emp;
+
+-- 6) IT GIVES THE INTERVSL OR DIFFERENCE BETWEEN  TWO DAYS
+SELECT * FROM EMP;
+ -- This gives neagative because in mysql the formula used to count the difference is date1 - date so always put the greater date as date1 and smaller one is date2
+SELECT DATEDIFF('2025-10-01','2026-12-30') AS DIFFERENCE;
+-- Like this
+SELECT DATEDIFF('2026-12-30','2025-10-01') AS DIFFERENCE;
+
+-- 7) DATE_FROMAT IS USE TO DISPLAY THE DATE IN ANY FORMAT  here '%a' is lways in small value.
+SELECT Name, DATE_FORMAT('2026-12-30','%a') AS DATE_FORMAT_TYPE FROM Emp;
+
+SELECT Name, DATE_FORMAT(Joining_Date, '%a') AS Day_Joined
+FROM Emp;
+
+SELECT * FROM Emp;
+
+-- Get the day of the week they joined (Monday, Tuesday, etc.):
+SELECT Name, DATE_FORMAT(Joining_Date,'%a') FROM Emp;
+
+-- Get only the month name from the joining date:
+SELECT Name,Extract(MONTH FROM Joining_Date) AS Joining_Month FROM Emp;
+
+-- Get only the year of joining
+SELECT Name,Mobile,EXTRACT(YEAR FROM Joining_Date) AS Joining_Month FROM Emp;
+
+-- Find employees who joined after a specific date
+SELECT * FROM Emp WHERE Joining_Date > '2026-12-30';
+
+-- Find employees who joined in a specific year
+SELECT Name, EXTRACT(YEAR FROM Joining_Date) AS Joining_Year FROM Emp WHERE YEAR(Joining_Date) > 2026;
+
+-- Find how many days each employee has worked
+SELECT Name, DATEDIFF(CURDATE(),Joining_Date) AS No_of_Days_Worked FROM Emp;
+
+-- Show how many months each employee has worked
+SELECT Name,TIMESTAMPDIFF(MONTH,Joining_Date, CURDATE()) AS No_of_Month FROM Emp;
+
+-- Show employees who joined in the last 1 year
+SELECT Name,Joining_Date FROM Emp WHERE Joining_Date > subdate(curdate(),INTERVAL 1 YEAR);
