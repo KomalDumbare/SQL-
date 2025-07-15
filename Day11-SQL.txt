@@ -1,0 +1,75 @@
+USE interview1;
+CREATE TABLE String_Works (First_Name VARCHAR(20), Last_Name VARCHAR(20), Subject_Name VARCHAR(100), Lecture_Time DATE, Department_Id INT);
+ALTER TABLE String_Works MODIFY COLUMN Lecture_Time DATETIME; 
+SELECT * FROM String_Works;
+INSERT INTO String_Works VALUES("Komal","Dumbare","Communication","2025-07-14 13:33:00",01),
+("Aditi","Huwale","Computer Network", "2025-08-01 12:30:12",01),
+("Mansi","Dhobale","Business Intelligence","2025-09-14 11:23:55",02),
+("Anurag","Jadhav","Mathematics","2025-08-21 13:35:00",03),
+("Rohit","dhadhke","Software Engineering","2025-09-13 14:15:20",04),
+("Gauri","Awate","Internet of things","2025-08-15 15:25:10",03),
+("Trupti","Gholap","Computer Network","2025-10-13 10:10:10",05);
+SELECT * FROM String_Works;
+-- Concat() Function in String
+SELECT CONCAT(First_Name," ",Last_Name) AS Full_Name FROM String_Works; 
+
+-- CHAR_Length and CHARACTER_LENGTH Function to find the length of the String
+SELECT First_Name,char_length(First_Name) AS Length_of_String FROM String_Works;
+
+-- UPPER() For converting the Text into upper Case
+SELECT First_Name,Last_Name, UPPER(First_Name) AS Upper_Case FROM String_Works;
+
+-- LOWER() Convert all text into lower case
+SELECT Subject_Name, LOWER(Subject_Name) AS Lower_Case FROM String_Works;
+
+-- LENGTH()- it returns the length of string in bytes 
+SELECT First_Name,LENGTH(First_Name) AS In_Bytes FROM String_Works;
+
+-- REPLACE() Function for replacing the Substring
+SELECT REPLACE("Komal", "o","a");
+
+-- SUBSTRING()/SUBSTR() is used to exatract the sub part os the string from sspecified start position to specified end position
+SELECT SUBSTRING("Anurag",1,3) AS Short_Name;
+
+-- LEFT() used to extract the specified number of character from left 
+SELECT LEFT("Anurag",3) AS Left_Extract;
+
+-- RIGHT() used to extract the specified number of character from right 
+SELECT RIGHT("Anurag",3) AS Right_Extract;
+
+-- INSTR() - find the position of the first occurence of substring in a string
+SELECT INSTR("Hello World", "World") AS Sub_String;
+
+-- TRIM - Remove Leading and Trailing spaces
+SELECT TRIM(' ' FROM " Hello World ") AS Remove_Trail;
+
+-- REVERSE - Reverse the character in a string
+SELECT REVERSE("Kamal") AS Reverse_String;
+
+-- SOME OTHER STRING FUNCIONS
+-- ASCII() - This function used to find the ascii value of the character
+SELECT ASCII("K") AS Ascii_Value;
+
+-- CONCAT_WS it is used to concat the two words by using a specific symbol
+SELECT CONCAT_WS('-',First_Name,Last_Name) AS Full_Name FROM String_Works;
+
+-- FIND_IN_SET() - This function is used to find a specific symbol in the given set of string or words or character
+SELECT FIND_IN_SET('U', 'a,b,e,u,d,f,q') AS FIND;
+
+-- INSTR()- used to calculate the occurence of the any character in string
+SELECT INSTR("Greeks for Greeks", 'e') AS No_of_Occurence;
+
+-- LOCATE()- used to convert specified word into smaller case
+SELECT LOCATE('FOR',"GREEKS FOR GREEKS") AS LowerCase; 
+
+-- LPAD()- this function is used to make the given string of the given size by adding the given symbol in front
+SELECT LPAD("Greeks",10,'o') AS New_String;
+
+-- MID()- used to find the word from the specified position to the given size
+SELECT MID("greeks for greeks",6,7) AS Position_of_Word;
+
+-- POSITION()- this function is used to find position of the first occurence of the given alphabet
+SELECT POSITION('e' IN 'Greeks for greeks') AS First_Position ;
+
+-- REPEAT()- This function is used to write the specified function in given number of time
+SELECT REPEAT("Komal",5) as Repeat_Once_again;
